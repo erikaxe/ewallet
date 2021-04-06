@@ -37,3 +37,9 @@
   }
 }
  */
+
+.links {
+  width: 40%;
+  list-style: none;
+  align-items: center;
+}
