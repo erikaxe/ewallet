@@ -43,3 +43,11 @@
   list-style: none;
   align-items: center;
 }
+
+.bank-card {
+  height: 234px;
+  width: 416px;
+  background-color: gray;
+  border-radius: 2%;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.205);
+}
