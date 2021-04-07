@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+/* import useForm from "react-hook-form"; */
 
 export default function AddCard() {
   // card number state
@@ -9,6 +10,11 @@ export default function AddCard() {
   const [validState, setValidState] = useState("xx / xx");
   // card type state
   const [cardState, setCardState] = useState("VISA");
+
+  // submit state
+  const [submitCard, setSubmitCard] = useState();
+
+  const onSubmit = () => {};
 
   return (
     <div className="container">
@@ -21,7 +27,7 @@ export default function AddCard() {
       </div>
       {/*!!!!!!!!!!!! FORM STARTS, FIX FORM!!!!!!!!!!*/}
 
-      <form>
+      <form onSubmit={onSubmit()}>
         <div className="group">
           <label htmlFor="number">CARD NUMBER</label> <br />
           <input
@@ -31,6 +37,8 @@ export default function AddCard() {
               const cardNumber = e.target.value;
               setNumberState(cardNumber);
             }}
+            required
+            maxLength="16"
           />
         </div>
 
@@ -43,6 +51,7 @@ export default function AddCard() {
               const cardName = e.target.value;
               setNameState(cardName);
             }}
+            required
           />
         </div>
         <div className="group">
@@ -54,11 +63,12 @@ export default function AddCard() {
               const cardValid = e.target.value;
               setValidState(cardValid);
             }}
+            required
           />
         </div>
         <div className="group">
           <label htmlFor="ccv">CCV</label> <br />
-          <input type="number" name="ccv" />
+          <input type="number" name="ccv" required />
         </div>
         <div className="group">
           <label htmlFor="vendor">VENDOR</label> <br />
@@ -69,6 +79,7 @@ export default function AddCard() {
               const selectedCard = e.target.value;
               setCardState(selectedCard);
             }}
+            required
           >
             <option value="" disabled selected hidden>
               Choose a card...
@@ -78,7 +89,11 @@ export default function AddCard() {
             <option value="American Express">American Express</option>
           </select>
         </div>
-        <button className="btn btn-secondary mt-5">ADD CARD</button>
+        <input
+          type="submit"
+          className="btn btn-secondary mt-5"
+          value="ADD CARD"
+        />
       </form>
 
       {/*!!!!!!!!!!!! FORM ENDS,  FIX FORM!!!!!!!!!!*/}
