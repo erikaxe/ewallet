@@ -12,7 +12,9 @@ export default function AddCard() {
   const [cardState, setCardState] = useState("VISA");
 
   // submit state
-  const [submitCard, setSubmitCard] = useState();
+  const [submitCard, setSubmitCard] = useState({});
+
+  /*!!!!!!!!!! FIXA DISPATCH FÖR ATT SKICKA TILL REDUXEN  !!!!!!!!!*/
 
   const onSubmit = () => {};
 
