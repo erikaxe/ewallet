@@ -7,10 +7,10 @@ export default function Navbar() {
       <h3>Navbar</h3>
       <ul className="links d-flex justify-content-around">
         <Link to="/">
-          <li className="text-danger">Home</li>
+          <li className="btn btn-secondary">Home</li>
         </Link>
         <Link to="/addcard">
-          <li className="text-danger">Add card</li>
+          <li className="btn btn-secondary">Add card</li>
         </Link>
       </ul>
     </div>
