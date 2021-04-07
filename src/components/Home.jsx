@@ -7,7 +7,7 @@ SEN SKA DEN "FYLLAS" PÅ OCH LOOPA FRAM DE NYA KORTEN MAN LÄGGER TILL */
 export default function Home() {
   return (
     <div className="container">
-      <h1 className="text-center mt-5">E-WALLET</h1>
+      <h2 className="text-center mt-5">E-WALLET</h2>
       <p className="text-center mt-5">CURRENT ACTIVE CARD</p>
       <div className="text-center mt-5">
         !!!!!!!!!!!!!!!!!! INSERT ACTIVE CARD FROM STATE HERE
