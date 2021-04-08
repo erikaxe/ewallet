@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-/* import useForm from "react-hook-form"; */
+import { useDispatch } from "react-redux";
+import { saveCard } from "./cardsSlice";
 
 export default function AddCard() {
   // card number state
@@ -12,16 +13,51 @@ export default function AddCard() {
   const [cardState, setCardState] = useState("VISA");
 
   // submit state
-  const [submitCard, setSubmitCard] = useState({});
+  /* const [submitCard, setSubmitCard] = useState({});
+  console.log(submitCard); */
+
+  const dispatch = useDispatch();
+
+  const addCard = () => {
+    console.log(`Adding ${cardState}`);
+
+    dispatch(
+      saveCard({
+        number: numberState,
+        name: nameState,
+        valid: validState,
+        type: cardState,
+        isActive: false,
+        id: Date.now(),
+      })
+    );
+  };
 
   /*!!!!!!!!!! FIXA DISPATCH FÖR ATT SKICKA TILL REDUXEN  !!!!!!!!!*/
 
-  const onSubmit = () => {};
+  /* const onSubmit = () => {
+    dispatch(getCards());
+
+    
+    setNumberState("xxxx xxxx xxxx xxxx");
+    setNameState("ANDERS ANDERSSON");
+    setValidState("xx / xx");
+    setCardState("VISA");
+  }; */
+
+  /* const toggleRed = () => {
+    setRed(!red);
+  }; */
 
   return (
     <div className="container">
       <h2 className="text-center mt-5">ADD A NEW BANK CARD</h2>
-      <div className="bank-card">
+      <div
+        className="bank-card"
+        /* style={toggleRed ? { background: "red" } : { background: "gray" }} */
+        /* style={cardState === "VISA" ? { background: "red" } : null} */
+        /* style={cardState === "American Express" ? { background: "blue" } : null} */
+      >
         <h3>{cardState}</h3>
         <p>{numberState}</p>
         <p>{nameState}</p>
@@ -29,7 +65,7 @@ export default function AddCard() {
       </div>
       {/*!!!!!!!!!!!! FORM STARTS, FIX FORM!!!!!!!!!!*/}
 
-      <form onSubmit={onSubmit()}>
+      <form>
         <div className="group">
           <label htmlFor="number">CARD NUMBER</label> <br />
           <input
@@ -38,6 +74,7 @@ export default function AddCard() {
             onChange={(e) => {
               const cardNumber = e.target.value;
               setNumberState(cardNumber);
+              /* setSubmitCard({ cardNumber }); */
             }}
             required
             maxLength="16"
@@ -52,6 +89,7 @@ export default function AddCard() {
             onChange={(e) => {
               const cardName = e.target.value;
               setNameState(cardName);
+              /* setSubmitCard({ cardName }); */
             }}
             required
           />
@@ -64,6 +102,7 @@ export default function AddCard() {
             onChange={(e) => {
               const cardValid = e.target.value;
               setValidState(cardValid);
+              /* setSubmitCard({ cardValid }); */
             }}
             required
           />
@@ -80,6 +119,7 @@ export default function AddCard() {
             onChange={(e) => {
               const selectedCard = e.target.value;
               setCardState(selectedCard);
+              /* setSubmitCard({ selectedCard }); */
             }}
             required
           >
@@ -91,12 +131,15 @@ export default function AddCard() {
             <option value="American Express">American Express</option>
           </select>
         </div>
-        <input
-          type="submit"
-          className="btn btn-secondary mt-5"
-          value="ADD CARD"
-        />
       </form>
+      <button
+        onClick={addCard}
+        type="submit"
+        className="btn btn-secondary mt-5"
+        value="ADD CARD"
+      >
+        ADD CARD
+      </button>
 
       {/*!!!!!!!!!!!! FORM ENDS,  FIX FORM!!!!!!!!!!*/}
     </div>

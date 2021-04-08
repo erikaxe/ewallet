@@ -1,11 +1,57 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice /* , createAsyncThunk */ } from "@reduxjs/toolkit";
+
+/* export const getCards = createAsyncThunk("cards/getCards", async () => {
+  return fetch();
+}); */
+
+const initialState = {
+  cardList: [],
+};
 
 const slice = createSlice({
   name: "cards",
 
-  /* !!!!!!!!! INITIAL STATE SKA VISAS SOM ACTIVE CARD DIREKT, 
-  EV GÖR ETT NYTT STATE DÄR ALLA NYA KORTEN HAMNAR NÄR MAN
-  SKAPAR DE OCH LOOPA FRAM DEN UNDER ICKE ACTIVE CARDS !!!!!!!!!*/
+  initialState,
+
+  reducers: {
+    // action to update state
+    saveCard: (state, action) => {
+      state.cardList.push(action.payload);
+    },
+
+    setActive: (state, action) => {
+      state.cardList.map((item) => {
+        if (action.payload === item.id) {
+          if (item.isActive === true) {
+            item.isActive = false;
+          } else {
+            item.isActive = true;
+          }
+        }
+      });
+    },
+  },
+
+  extraReducers: {},
+});
+
+export const { saveCard, setActive } = slice.actions;
+
+// Go in cards slice and pick out the cardList state and return it
+export const selectCardList = (state) => state.cards.cardList;
+
+export default slice.reducer;
+
+/* const { actions, reducer } = slice;
+
+export const { saveCard } = actions;
+
+export default reducer; */
+
+/* 
+
+const slice = createSlice({
+  name: "cards",
 
   initialState: [
     {
@@ -14,16 +60,28 @@ const slice = createSlice({
       valid: "10 / 24",
       card: "VISA",
     },
+    {
+      number: "2222 2222 2222 2222",
+      name: "ANDERS ANDERSSON",
+      valid: "12 / 22",
+      card: "MasterCard",
+    },
   ],
 
-  reducers: {},
+  reducers: {
+    // action to update state
+    saveCard: (state, action) => {
+      state.cardList.push(action.payload);
+    },
+  },
 
   extraReducers: {},
 });
 
 const { actions, reducer } = slice;
 
-/* ATM INGEN REMOVE FUNKTION ÄNNU, SKA FIXAS EN TILL REMOVE CARD */
-export const { removeCard } = actions;
+export const { saveCard } = actions;
 
 export default reducer;
+
+*/
