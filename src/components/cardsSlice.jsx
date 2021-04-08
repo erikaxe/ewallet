@@ -1,10 +1,7 @@
-import { createSlice /* , createAsyncThunk */ } from "@reduxjs/toolkit";
-
-/* export const getCards = createAsyncThunk("cards/getCards", async () => {
-  return fetch();
-}); */
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  // Array to contain new cards
   cardList: [],
 };
 
@@ -19,6 +16,7 @@ const slice = createSlice({
       state.cardList.push(action.payload);
     },
 
+    /* Onödigt komplex action enbart för att styra true och false, verkar bättre ändra den med "vanligt" useState istället!!! */
     setActive: (state, action) => {
       state.cardList.map((item) => {
         if (action.payload === item.id) {
