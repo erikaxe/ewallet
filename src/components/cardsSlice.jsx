@@ -2,7 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   // Array to contain new cards
-  cardList: [],
+  cardList: [
+    {
+      number: "5555555555555555",
+      name: "Erik Axelsson",
+      expiry: "1010",
+      cvc: "111",
+      /* id: Date.now(), */
+      status: true,
+    },
+    {
+      number: "6555555555555555",
+      name: "Adam svensson",
+      expiry: "1111",
+      cvc: "222",
+      /* id: Date.now(), */
+      status: false,
+    },
+  ],
 };
 
 const slice = createSlice({
@@ -11,33 +28,29 @@ const slice = createSlice({
   initialState,
 
   reducers: {
-    // action to update state
+    // action to push new cards to array
     saveCard: (state, action) => {
       state.cardList.push(action.payload);
     },
 
-    /* Onödigt komplex action enbart för att styra true och false, verkar bättre ändra den med "vanligt" useState istället!!! */
-    setActive: (state, action) => {
-      state.cardList.map((item) => {
-        if (action.payload === item.id) {
-          if (item.isActive === true) {
-            item.isActive = false;
-          } else {
-            item.isActive = true;
-          }
-        }
-      });
+    changeStatus: (state, action) => {
+      console.log(state.cardList[0].status);
     },
+
+    /* removeCard: */
   },
 
   extraReducers: {},
 });
 
-export const { saveCard, setActive } = slice.actions;
+// Export actions
+export const { saveCard, changeStatus } = slice.actions;
 
 // Go in cards slice and pick out the cardList state and return it
-export const selectCardList = (state) => state.cards.cardList;
+/* export const selectCardList = (state) => state.cards.cardList; */
+/* export const selectNewCardList = (state) => state.cards.list; */
 
+// Export the slice
 export default slice.reducer;
 
 /* const { actions, reducer } = slice;
