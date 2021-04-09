@@ -1,73 +1,73 @@
-import React from "react";
-import Card from "./Card";
+import React, { useState, useDispatch } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCardList } from "./cardsSlice";
+import { changeStatus } from "./cardsSlice";
 
-/* USESTATE SKA IN HÄR DEN SKA INNEHÅLLA EN INITIAL STATE SOM HAR DET FÖRSTA KORTET, 
-SEN SKA DEN "FYLLAS" PÅ OCH LOOPA FRAM DE NYA KORTEN MAN LÄGGER TILL */
-
-/* const cardList = [
-  {
-    number: "testNumber",
-    name: "testName",
-    valid: "testValid",
-    type: "testCard",
-    isActive: false,
-    id: 695426487923,
-  },
-  {
-    number: "testNumber2",
-    name: "testName2",
-    valid: "testValid2",
-    type: "testCard2",
-    isActive: true,
-    id: 474576,
-  },
-]; */
+import Cards from "react-credit-cards";
+import "react-credit-cards/es/styles-compiled.css";
 
 export default function Home() {
-  /* const initialCard = useSelector((state) => state.cards);
-  console.log(initialCard);
-  const loop = initialCard.map((item, i) => {
-    return (
-      <div className="bank-card m-3" key={i}>
-        <h3>{item.card}</h3>
-        <p>{item.number}</p>
-        <p>{item.name}</p>
-        <p>{item.valid}</p>
-      </div>
-    );
-  }); */
-  const cardList = useSelector(selectCardList);
+  // get the cardList array
+  const cardList = useSelector((state) => state.cards.cardList);
+  /* const newCardList = useSelector(selectNewCardList); */
+  const [active, setActive] = useState(false);
+  console.log(active);
+
+  const toggleActive = () => {
+    // set false / true on the card
+    setActive(!active);
+  };
+
+  /* const dispatch = useDispatch();
+
+  const setStatus = (id) => {
+    dispatch(changeStatus(id));
+  }; */
   return (
     <div className="container">
       <h2 className="text-center mt-5">E-WALLET</h2>
       <p className="text-center mt-5">CURRENT ACTIVE CARD</p>
-      <p className="text-center mt-5">
-        !!!!!!!!!!!!INSERT INITIALSTATE CARD!!!!!!!!!!!!
-      </p>
-
+      {cardList &&
+        cardList.map((item, i) => {
+          return item.status ? (
+            <div key={i} onClick={toggleActive}>
+              <Cards
+                key={i}
+                number={item.number}
+                name={item.name}
+                expiry={item.expiry}
+                cvc={item.cvc}
+                status={item.status}
+              />
+            </div>
+          ) : null;
+        })}
       <hr />
+
       <p className="text-center mt-5">DEACTIVATED CARDS</p>
-      {cardList.map((item, i) => {
-        return (
-          <Card
-            key={i}
-            number={item.number}
-            name={item.name}
-            valid={item.valid}
-            type={item.type}
-            isActive={item.isActive}
-            id={item.id}
-          />
-        );
-      })}
+      {/* loop all cards that are status false */}
+      {cardList &&
+        cardList.map((item, i) => {
+          return item.status ? null : (
+            <div key={i} onClick={toggleActive}>
+              <Cards
+                key={i}
+                number={item.number}
+                name={item.name}
+                expiry={item.expiry}
+                cvc={item.cvc}
+                status={item.status}
+              />
+            </div>
+          );
+        })}
       <div className="row">{/* <ul>{loop}</ul> */}</div>
 
-      <Link to="/addcard">
-        <button className="btn btn-dark">ADD A NEW CARD</button>
-      </Link>
+      <div className="main-btn mt-5">
+        <Link to="/addcard">
+          <button className="btn btn-dark">ADD A NEW CARD</button>
+        </Link>
+      </div>
     </div>
   );
 }
