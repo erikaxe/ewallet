@@ -1,7 +1,7 @@
 import React, { useState, useDispatch } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { changeStatus } from "./cardsSlice";
+import { changeStatus, setActive } from "./cardsSlice";
 
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
@@ -18,17 +18,19 @@ export default function Home() {
     setActive(!active);
   };
 
-  /* const dispatch = useDispatch();
+  /* const dispatch = useDispatch(); */
 
-  const setStatus = (id) => {
+  /* const setStatus = (id) => {
     dispatch(changeStatus(id));
   }; */
+
   return (
     <div className="container">
       <h2 className="text-center mt-5">E-WALLET</h2>
       <p className="text-center mt-5">CURRENT ACTIVE CARD</p>
       {cardList &&
         cardList.map((item, i) => {
+          // if status is true render card, else do nothing
           return item.status ? (
             <div key={i} onClick={toggleActive}>
               <Cards
@@ -38,6 +40,7 @@ export default function Home() {
                 expiry={item.expiry}
                 cvc={item.cvc}
                 status={item.status}
+                id={item.id}
               />
             </div>
           ) : null;
@@ -45,9 +48,10 @@ export default function Home() {
       <hr />
 
       <p className="text-center mt-5">DEACTIVATED CARDS</p>
-      {/* loop all cards that are status false */}
+
       {cardList &&
         cardList.map((item, i) => {
+          // if status is false render card, else do nothing
           return item.status ? null : (
             <div key={i} onClick={toggleActive}>
               <Cards
@@ -57,6 +61,7 @@ export default function Home() {
                 expiry={item.expiry}
                 cvc={item.cvc}
                 status={item.status}
+                id={item.id}
               />
             </div>
           );
