@@ -10,17 +10,20 @@ export default function AddCard() {
   const [number, setNumber] = useState(""); /* xxxx xxxx xxxx xxxx */
   // name state
   const [name, setName] = useState(""); /* ANDERS ANDERSSON */
-  // valid state
-  const [expiry, setExpiry] = useState(""); /* xx / xx */
-
-  // new cvc state
+  // expiry state
+  const [expiry, setExpiry] = useState("1218"); /* xx / xx */
+  // cvc state
   const [cvc, setCvc] = useState("");
-
-  // new package state for styling and animation
+  // package state for styling and animation
   const [focus, setFocus] = useState("");
+
+  // MMYY error state
+  const [error, setError] = useState("");
+  console.log(error);
 
   const dispatch = useDispatch();
 
+  // send states to render new card
   const addCard = (e) => {
     e.preventDefault();
     dispatch(
@@ -29,7 +32,7 @@ export default function AddCard() {
         name: name,
         expiry: expiry,
         cvc: cvc,
-        /* id: Date.now(), */
+        id: Date.now(),
         status: false,
       })
     );
@@ -61,10 +64,49 @@ export default function AddCard() {
     }
   }; */
 
+  /* function validDate(value) {
+    let result = false;
+    value = value.split("/");
+    let pattern = /^\d{2}$/;
+
+    if (value[0] < 1 || value[0] > 12) result = true;
+
+    if (!pattern.test(value[0]) || !pattern.test(value[1])) result = true;
+
+    if (value[2]) result = true;
+
+    if (result) alert("Please enter a valid date in MM/YY format.");
+  } */
+
+  const validate = (string) => {
+    // year must be atleast 21
+    const yearLimit = 21; // or pass this as an argument if you want
+
+    // MMYY must match this
+    const regex = /^(?:0[1-9]|1[0-2])(\d{2})$/;
+    const match = string.match(regex);
+    if (!match) {
+      setError("Please enter a valid expire date");
+      return false;
+    }
+    const year = Number(match[1]);
+    return year >= yearLimit;
+  };
+
+  console.log(
+    validate(expiry)
+    /* validate("1234"),
+    validate("1212"),
+    validate("0101"),
+    validate("0118"),
+    validate("0119") */
+  );
+
   return (
     <div className="container">
       <h2 className="text-center mt-5">ADD A NEW BANK CARD</h2>
 
+      {/* render a preview card */}
       <Cards
         number={number}
         name={name}
@@ -82,6 +124,66 @@ export default function AddCard() {
         <li>Hipercard = start nr 60</li>
       </ul>
       <form className="form" onSubmit={addCard}>
+        <label htmlFor="vendor">Vendor</label>
+        <select className="main-select" name="vendor">
+          <option
+            onClick={() => {
+              const cardNumber = "4";
+              setNumber(cardNumber);
+            }}
+          >
+            VISA
+          </option>
+          <option
+            onClick={() => {
+              const cardNumber = "55";
+              setNumber(cardNumber);
+            }}
+          >
+            MasterCard
+          </option>
+          <option
+            onClick={() => {
+              const cardNumber = "5019";
+              setNumber(cardNumber);
+            }}
+          >
+            Dankort
+          </option>
+          <option
+            onClick={() => {
+              const cardNumber = "62";
+              setNumber(cardNumber);
+            }}
+          >
+            China UnionPay
+          </option>
+          <option
+            onClick={() => {
+              const cardNumber = "50";
+              setNumber(cardNumber);
+            }}
+          >
+            Maestro
+          </option>
+          <option
+            onClick={() => {
+              const cardNumber = "65";
+              setNumber(cardNumber);
+            }}
+          >
+            Discover
+          </option>
+          <option
+            onClick={() => {
+              const cardNumber = "60";
+              setNumber(cardNumber);
+            }}
+          >
+            Hipercard
+          </option>
+        </select>
+        <label htmlFor="number">Card number</label>
         <input
           type="tel"
           name="number"
@@ -92,6 +194,7 @@ export default function AddCard() {
           minLength="16"
           maxLength="16"
         />
+        <label htmlFor="name">Name</label>
         <input
           type="text"
           name="name"
@@ -102,14 +205,21 @@ export default function AddCard() {
           minLength="2"
           maxLength="16"
         />
+        <label htmlFor="expiry">Expire date</label>
         <input
           type="text"
           name="expiry"
-          placeholder="MM/YY"
+          placeholder="MMYY"
           value={expiry}
+          /* onClick={(e) => validDate(e.target.value)} */
           onChange={(e) => setExpiry(e.target.value)}
           onFocus={(e) => setFocus(e.target.name)}
+          minLength="4"
+          maxLength="4"
         />
+        <p>{error}</p>
+        {/* <button onClick={() => validDate(expiry)}>Validate expire date</button> */}
+        <label htmlFor="cvc">Cvc</label>
         <input
           type="tel"
           name="cvc"
@@ -120,91 +230,23 @@ export default function AddCard() {
           minLength="3"
           maxLength="3"
         />
-        <input
+        <button
           onClick={addCard}
           type="submit"
           className="btn btn-secondary mt-5"
           value="ADD CARD"
-        ></input>
+          disabled={
+            number.length < 16 ||
+            name.length < 2 ||
+            /* expiry.length < 4 || */
+            cvc.length < 3 ||
+            // validate fungerar inte som tänkt
+            validate(expiry)
+          }
+        >
+          ADD CARD
+        </button>
       </form>
     </div>
   );
 }
-
-/* 
-  style={toggleRed ? { background: "red" } : { background: "gray" }}
-  style={cardState === "VISA" ? { background: "red" } : null}
-  style={cardState === "American Express" ? { background: "blue" } : null}
-*/
-
-/* 
-
-<div className="group">
-          <label htmlFor="number">CARD NUMBER</label> <br />
-          <input
-            type="number"
-            name="number"
-            onChange={(e) => {
-              const cardNumber = e.target.value;
-              setNumberState(cardNumber);
-            }}
-            required
-            maxLength="16"
-          />
-        </div>
-
-        <div className="group">
-          <label htmlFor="holder">CARD HOLDER</label> <br />
-          <input
-            type="text"
-            name="holder"
-            onChange={(e) => {
-              const cardName = e.target.value;
-              setNameState(cardName);
-            }}
-            required
-          />
-        </div>
-        <div className="group">
-          <label htmlFor="valid">VALID THRU</label> <br />
-          <input
-            type="number"
-            name="valid"
-            onChange={(e) => {
-              const cardValid = e.target.value;
-              setValidState(cardValid);
-            }}
-            required
-          />
-        </div>
-        <div className="group">
-          <label htmlFor="ccv">CCV</label> <br />
-          <input type="number" name="ccv" required />
-        </div>
-        <div className="group">
-          <label htmlFor="vendor">VENDOR</label> <br />
-          <select
-            type="text"
-            name="vendor"
-            onChange={(e) => {
-              const selectedCard = e.target.value;
-              setCardState(selectedCard);
-            }}
-            required
-          >
-            <option value="" disabled selected hidden>
-              Choose a card...
-            </option>
-            <option value="MasterCard">Mastercard</option>
-            <option value="VISA">VISA</option>
-            <option value="American Express">American Express</option>
-          </select>
-        </div>
-        <input
-          onClick={addCard}
-          type="submit"
-          className="btn btn-secondary mt-5"
-          value="ADD CARD"
-        ></input>
-
-*/
