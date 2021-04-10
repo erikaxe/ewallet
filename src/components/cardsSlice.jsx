@@ -6,17 +6,17 @@ const initialState = {
     {
       number: "5555555555555555",
       name: "Erik Axelsson",
-      expiry: "1010",
+      expiry: "1025",
       cvc: "111",
-      /* id: Date.now(), */
+      id: Date.now(),
       status: true,
     },
     {
       number: "6555555555555555",
       name: "Adam svensson",
-      expiry: "1111",
+      expiry: "1127",
       cvc: "222",
-      /* id: Date.now(), */
+      id: Date.now(),
       status: false,
     },
   ],
@@ -37,6 +37,18 @@ const slice = createSlice({
       console.log(state.cardList[0].status);
     },
 
+    /* setActive: (state, action) => {
+      state.cardList.map((item) => {
+        if (action.payload === item.id) {
+          if (item.status === true) {
+            item.status = false;
+          } else {
+            item.status = true;
+          }
+        }
+      });
+    }, */
+
     /* removeCard: */
   },
 
@@ -44,7 +56,7 @@ const slice = createSlice({
 });
 
 // Export actions
-export const { saveCard, changeStatus } = slice.actions;
+export const { saveCard, changeStatus, setActive } = slice.actions;
 
 // Go in cards slice and pick out the cardList state and return it
 /* export const selectCardList = (state) => state.cards.cardList; */
