@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveCard } from "./cardsSlice";
 
 import Cards from "react-credit-cards";
@@ -17,6 +17,8 @@ export default function AddCard() {
   // package state for styling and animation
   const [focus, setFocus] = useState("");
 
+  const cardList = useSelector((state) => state.cards.cardList);
+
   const dispatch = useDispatch();
 
   // send states to render new card
@@ -28,7 +30,7 @@ export default function AddCard() {
         name: name,
         expiry: expiry,
         cvc: cvc,
-        /* id: Date.now(), */
+        id: Date.now(),
         status: false,
       })
     );
@@ -52,25 +54,27 @@ export default function AddCard() {
       return false;
     }
 
-    // match the first group in the regex
     const month = Number(match[1]);
-    // match the second group in the regex
+
     const year = Number(match[2]);
 
     return "20" + year >= today.getFullYear() && month >= today.getMonth() + 1;
   };
 
   const validateCvc = (string) => {
+    // any digits, minimum 3 is ok
     const regex = /^\d{3}$/;
     return regex.test(string);
   };
 
   const validateName = (string) => {
+    // all characters is valid exept numbers 0-9
     const regex = /^[^0-9]{2,}$/;
     return regex.test(string);
   };
 
   const validateNumber = (string) => {
+    // 4-5 followed by 0-9 is ok & 6 followed by 0,2,5 is ok, + 14 digits
     const regex = /^([4-5][0-9]|6[025])\d{14}$/;
     return regex.test(string);
   };
@@ -202,16 +206,25 @@ export default function AddCard() {
           minLength="3"
           maxLength="3"
         />
+        <div className="text-center mt-4">
+          <p className="m-0">{cardList.length} / 4 cards</p>
+          <p className="mb-5">
+            {cardList.length === 4
+              ? "You have the maximum amount of cards"
+              : null}
+          </p>
+        </div>
         <button
           onClick={addCard}
           type="submit"
-          className="btn btn-secondary mt-5"
+          className="btn btn-secondary mb-5"
           value="ADD CARD"
           disabled={
             !validateNumber(number) ||
             !validateName(name) ||
             !validateCvc(cvc) ||
-            !validate(expiry)
+            !validate(expiry) ||
+            cardList.length === 4
           }
         >
           ADD CARD
