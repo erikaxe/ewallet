@@ -8,7 +8,7 @@ const initialState = {
       name: "Erik Axelsson",
       expiry: "1025",
       cvc: "111",
-      /* id: Date.now(), */
+      id: Date.now(),
       status: true,
     },
     {
@@ -16,7 +16,7 @@ const initialState = {
       name: "Adam svensson",
       expiry: "1127",
       cvc: "222",
-      /* id: Date.now(), */
+      id: Date.now(),
       status: false,
     },
   ],
@@ -34,8 +34,33 @@ const slice = createSlice({
     },
 
     changeStatus: (state, action) => {
-      console.log(action);
+      state.cardList.map((item) => {
+        if (action.payload === item.id) {
+          if (item.status === true) {
+            item.status = false;
+          }
+          if (item.status === false) {
+            item.status = true;
+          }
+        }
+        console.log(item.status);
+      });
     },
+
+    /* 
+    changeStatus: (state, action) => {
+      state.cardList.map((item) => {
+        if (action.payload === item.id) {
+          if (item.status === item.status) {
+            item.status = !item.status;
+          } else {
+            item.status = item.status;
+          }
+        }
+        console.log(item.status);
+      });
+    },
+    */
 
     /* setActive: (state, action) => {
       state.cardList.map((item) => {
