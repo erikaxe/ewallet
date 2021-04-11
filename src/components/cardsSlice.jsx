@@ -33,48 +33,23 @@ const slice = createSlice({
       state.cardList.push(action.payload);
     },
 
-    changeStatus: (state, action) => {
-      state.cardList.map((item) => {
-        if (action.payload === item.id) {
-          if (item.status === true) {
-            item.status = false;
-          }
-          if (item.status === false) {
-            item.status = true;
-          }
+    changeStatus: (state, { payload }) => {
+      /* console.log(state.cardList[payload].status);
+      const trueFalse = state.cardList[payload].status; */
+
+      for (let i = 0; i < state.cardList.length; i++) {
+        // if status is true make it false
+        if (state.cardList[i].status === true) {
+          state.cardList[i].status = false;
         }
-        console.log(item.status);
-      });
+      }
+      // "reverse" the status
+      state.cardList[payload].status = !state.cardList[payload].status;
     },
 
-    /* 
-    changeStatus: (state, action) => {
-      state.cardList.map((item) => {
-        if (action.payload === item.id) {
-          if (item.status === item.status) {
-            item.status = !item.status;
-          } else {
-            item.status = item.status;
-          }
-        }
-        console.log(item.status);
-      });
+    removeCard: (state, { payload }) => {
+      // 2 lines needed, look up filter(), the id: Date.now() should be used here.
     },
-    */
-
-    /* setActive: (state, action) => {
-      state.cardList.map((item) => {
-        if (action.payload === item.id) {
-          if (item.status === true) {
-            item.status = false;
-          } else {
-            item.status = true;
-          }
-        }
-      });
-    }, */
-
-    /* removeCard: */
   },
 
   extraReducers: {},
@@ -83,53 +58,5 @@ const slice = createSlice({
 // Export actions
 export const { saveCard, changeStatus, setActive } = slice.actions;
 
-// Go in cards slice and pick out the cardList state and return it
-/* export const selectCardList = (state) => state.cards.cardList; */
-/* export const selectNewCardList = (state) => state.cards.list; */
-
 // Export the slice
 export default slice.reducer;
-
-/* const { actions, reducer } = slice;
-
-export const { saveCard } = actions;
-
-export default reducer; */
-
-/* 
-
-const slice = createSlice({
-  name: "cards",
-
-  initialState: [
-    {
-      number: "1111 1111 1111 1111",
-      name: "ERIK AXELSSON",
-      valid: "10 / 24",
-      card: "VISA",
-    },
-    {
-      number: "2222 2222 2222 2222",
-      name: "ANDERS ANDERSSON",
-      valid: "12 / 22",
-      card: "MasterCard",
-    },
-  ],
-
-  reducers: {
-    // action to update state
-    saveCard: (state, action) => {
-      state.cardList.push(action.payload);
-    },
-  },
-
-  extraReducers: {},
-});
-
-const { actions, reducer } = slice;
-
-export const { saveCard } = actions;
-
-export default reducer;
-
-*/
