@@ -7,16 +7,17 @@ import "react-credit-cards/es/styles-compiled.css";
 
 export default function AddCard() {
   // card number state
-  const [number, setNumber] = useState(""); /* xxxx xxxx xxxx xxxx */
+  const [number, setNumber] = useState("");
   // name state
-  const [name, setName] = useState(""); /* ANDERS ANDERSSON */
+  const [name, setName] = useState("");
   // expiry state
-  const [expiry, setExpiry] = useState(""); /* xx / xx */
+  const [expiry, setExpiry] = useState("");
   // cvc state
   const [cvc, setCvc] = useState("");
-  // package state for styling and animation
+  // state for styling and animation
   const [focus, setFocus] = useState("");
 
+  // get the array from slice
   const cardList = useSelector((state) => state.cards.cardList);
 
   const dispatch = useDispatch();
@@ -42,9 +43,6 @@ export default function AddCard() {
   };
 
   const validate = (string) => {
-    // year must be atleast 21
-    /* const yearLimit = 21; */ // or pass this as an argument if you want
-
     // MMYY must match this
     const regex = /^(0[1-9]|1[0-2])(\d{2})$/;
     const today = new Date();
@@ -62,13 +60,13 @@ export default function AddCard() {
   };
 
   const validateCvc = (string) => {
-    // any digits, minimum 3 is ok
+    // any digits, must be 3 digits
     const regex = /^\d{3}$/;
     return regex.test(string);
   };
 
   const validateName = (string) => {
-    // all characters is valid exept numbers 0-9
+    // all characters is valid exept numbers 0-9, must be 2
     const regex = /^[^0-9]{2,}$/;
     return regex.test(string);
   };
@@ -196,8 +194,6 @@ export default function AddCard() {
         <label htmlFor="cvc">Cvc</label>
         <input
           type="tel"
-          min="001"
-          max="999"
           name="cvc"
           placeholder="CVC (must be 3 digits)"
           value={cvc}
