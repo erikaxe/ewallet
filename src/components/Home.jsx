@@ -1,4 +1,4 @@
-import React, { useState, useDispatch } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { changeStatus, setActive } from "./cardsSlice";
@@ -6,23 +6,31 @@ import { changeStatus, setActive } from "./cardsSlice";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 
+import { useDispatch } from "react-redux";
+
 export default function Home() {
   // get the cardList array
   const cardList = useSelector((state) => state.cards.cardList);
   /* const newCardList = useSelector(selectNewCardList); */
   const [active, setActive] = useState(false);
+  const [count, setCount] = useState(0);
+
   console.log(active);
 
   const toggleActive = () => {
     // set false / true on the card
+
     setActive(!active);
+    setCount((prevCount) => prevCount + 1);
+    console.log(count);
   };
 
-  /* const dispatch = useDispatch(); */
+  const dispatch = useDispatch();
 
-  /* const setStatus = (id) => {
-    dispatch(changeStatus(id));
-  }; */
+  const setStatus = (e) => {
+    console.log(e);
+    dispatch(changeStatus(e));
+  };
 
   return (
     <div className="container">
@@ -32,7 +40,7 @@ export default function Home() {
         cardList.map((item, i) => {
           // if status is true render card, else do nothing
           return item.status ? (
-            <div key={i} onClick={toggleActive}>
+            <div key={i} onClick={setStatus}>
               <Cards
                 key={i}
                 number={item.number}
@@ -40,7 +48,7 @@ export default function Home() {
                 expiry={item.expiry}
                 cvc={item.cvc}
                 status={item.status}
-                id={item.id}
+                id={i}
               />
             </div>
           ) : null;
