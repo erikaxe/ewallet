@@ -38,12 +38,12 @@ const slice = createSlice({
       const trueFalse = state.cardList[payload].status; */
 
       for (let i = 0; i < state.cardList.length; i++) {
-        // if status is true make it false
+        // if status on the "active" card is true make it false
         if (state.cardList[i].status === true) {
           state.cardList[i].status = false;
         }
       }
-      // "reverse" the status
+      // "reverse" the status on the card that should be active
       state.cardList[payload].status = !state.cardList[payload].status;
     },
 
