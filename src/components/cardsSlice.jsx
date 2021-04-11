@@ -8,7 +8,7 @@ const initialState = {
       name: "Erik Axelsson",
       expiry: "1025",
       cvc: "111",
-      id: Date.now(),
+      /* id: Date.now(), */
       status: true,
     },
     {
@@ -16,7 +16,7 @@ const initialState = {
       name: "Adam svensson",
       expiry: "1127",
       cvc: "222",
-      id: Date.now(),
+      /* id: Date.now(), */
       status: false,
     },
   ],
@@ -34,7 +34,7 @@ const slice = createSlice({
     },
 
     changeStatus: (state, action) => {
-      console.log(state.cardList[0].status);
+      console.log(action);
     },
 
     /* setActive: (state, action) => {
