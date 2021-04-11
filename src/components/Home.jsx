@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React /* , { useState } */ from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { changeStatus, setActive } from "./cardsSlice";
+import { changeStatus /* , setActive  */ } from "./cardsSlice";
 
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
@@ -12,23 +12,22 @@ export default function Home() {
   // get the cardList array
   const cardList = useSelector((state) => state.cards.cardList);
   /* const newCardList = useSelector(selectNewCardList); */
-  const [active, setActive] = useState(false);
-  const [count, setCount] = useState(0);
+  /* const [active, setActive] = useState(false); */
+  /* const [count, setCount] = useState(0); */
 
-  console.log(active);
+  /* console.log(active); */
 
-  const toggleActive = () => {
+  /* const toggleActive = () => {
     // set false / true on the card
-
-    setActive(!active);
+     setActive(!active); 
     setCount((prevCount) => prevCount + 1);
-    console.log(count);
-  };
+    console.log(count); 
+  }; */
 
   const dispatch = useDispatch();
 
   const setStatus = (e) => {
-    console.log(e);
+    console.log("setStatus fired, changeStatus dispatched");
     dispatch(changeStatus(e));
   };
 
@@ -61,7 +60,7 @@ export default function Home() {
         cardList.map((item, i) => {
           // if status is false render card, else do nothing
           return item.status ? null : (
-            <div key={i} onClick={toggleActive}>
+            <div key={i} onClick={setStatus}>
               <Cards
                 key={i}
                 number={item.number}
@@ -69,14 +68,15 @@ export default function Home() {
                 expiry={item.expiry}
                 cvc={item.cvc}
                 status={item.status}
-                id={item.id}
+                id={i}
               />
             </div>
           );
         })}
       <div className="row">{/* <ul>{loop}</ul> */}</div>
 
-      <div className="main-btn mt-5">
+      <div className="main-btn mt-5 text-center">
+        <p>{cardList.length} / 4 cards</p>
         <Link to="/addcard">
           <button className="btn btn-dark">ADD A NEW CARD</button>
         </Link>
