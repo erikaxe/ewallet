@@ -36,7 +36,7 @@ const slice = createSlice({
   initialState,
 
   reducers: {
-    // action to push new cards to array
+    // action to push states to array and create a new card
     saveCard: (state, action) => {
       state.cardList.push(action.payload);
     },
