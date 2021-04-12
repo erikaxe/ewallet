@@ -43,7 +43,7 @@ export default function AddCard() {
   };
 
   // Expire date validator
-  const validate = (string) => {
+  const validateExpiry = (string) => {
     // month 01-12 is ok, year 21-99 is ok
     const regex = /^(0[1-9]|1[0-2])[2-9][1-9]$/;
 
@@ -213,7 +213,7 @@ export default function AddCard() {
             !validateNumber(number) ||
             !validateName(name) ||
             !validateCvc(cvc) ||
-            !validate(expiry) ||
+            !validateExpiry(expiry) ||
             cardList.length === 4
           }
         >
