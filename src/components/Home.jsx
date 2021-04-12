@@ -24,6 +24,7 @@ export default function Home() {
       {cardList &&
         cardList.map((item, i) => {
           // if status is true render card, else do nothing
+          // Active card div
           return item.status ? (
             <>
               <Cards
@@ -45,20 +46,19 @@ export default function Home() {
       {cardList &&
         cardList.map((item, i) => {
           // if status is false render card, else do nothing
+          // NON Active card div
           return item.status ? null : (
-            <>
-              <div key={i} onClick={() => setStatus(i)}>
-                <Cards
-                  key={i}
-                  number={item.number}
-                  name={item.name}
-                  expiry={item.expiry}
-                  cvc={item.cvc}
-                  status={item.status}
-                  id={i}
-                />
-              </div>
-            </>
+            <div key={i} onClick={() => setStatus(i)}>
+              <Cards
+                key={i}
+                number={item.number}
+                name={item.name}
+                expiry={item.expiry}
+                cvc={item.cvc}
+                status={item.status}
+                id={i}
+              />
+            </div>
           );
         })}
 
