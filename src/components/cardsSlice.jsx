@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  // Array to contain new cards
+  // Array that contains all cards
   cardList: [
     {
       number: "5555555555555555",
@@ -16,6 +16,14 @@ const initialState = {
       name: "Adam svensson",
       expiry: "1127",
       cvc: "222",
+      id: Date.now(),
+      status: false,
+    },
+    {
+      number: "6212312312312312",
+      name: "Sven Adamsson",
+      expiry: "0429",
+      cvc: "219",
       id: Date.now(),
       status: false,
     },
@@ -34,9 +42,6 @@ const slice = createSlice({
     },
 
     changeStatus: (state, { payload }) => {
-      /* console.log(state.cardList[payload].status);
-      const trueFalse = state.cardList[payload].status; */
-
       for (let i = 0; i < state.cardList.length; i++) {
         // if status on the "active" card is true make it false
         if (state.cardList[i].status === true) {
@@ -44,19 +49,14 @@ const slice = createSlice({
         }
       }
       // "reverse" the status on the card that should be active
+      // change card from false to true
       state.cardList[payload].status = !state.cardList[payload].status;
     },
-
-    removeCard: (state, { payload }) => {
-      // 2 lines needed, look up filter(), the id: Date.now() should be used here.
-    },
   },
-
-  extraReducers: {},
 });
 
 // Export actions
-export const { saveCard, changeStatus, setActive } = slice.actions;
+export const { saveCard, changeStatus, removeCard } = slice.actions;
 
 // Export the slice
 export default slice.reducer;
