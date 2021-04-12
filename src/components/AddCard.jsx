@@ -44,20 +44,10 @@ export default function AddCard() {
 
   // Expire date validator
   const validate = (string) => {
-    // month 01-12 is ok
-    const regex = /^(0[1-9]|1[0-2])(\d{2})$/;
-    const today = new Date();
-    console.log(today.getMonth(), "get todays month log");
-    const match = string.match(regex);
-    if (!match) {
-      return false;
-    }
+    // month 01-12 is ok, year 21-99 is ok
+    const regex = /^(0[1-9]|1[0-2])[2-9][1-9]$/;
 
-    const month = Number(match[1]);
-
-    const year = Number(match[2]);
-
-    return "20" + year >= today.getFullYear() && month >= today.getMonth() + 1;
+    return regex.test(string);
   };
 
   // Cvc validator
