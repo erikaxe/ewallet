@@ -69,7 +69,7 @@ export default function AddCard() {
 
   // Name validator
   const validateName = (string) => {
-    // all characters is valid exept numbers 0-9, must be 2
+    // all characters is valid exept numbers 0-9, must be atleast 2 characters
     const regex = /^[^0-9]{2,}$/;
     return regex.test(string);
   };
