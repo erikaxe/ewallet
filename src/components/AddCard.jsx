@@ -42,11 +42,12 @@ export default function AddCard() {
     setCvc("");
   };
 
+  // Expire date validator
   const validate = (string) => {
-    // MMYY must match this
+    // month 01-12 is ok
     const regex = /^(0[1-9]|1[0-2])(\d{2})$/;
     const today = new Date();
-    console.log(today.getMonth());
+    console.log(today.getMonth(), "get todays month log");
     const match = string.match(regex);
     if (!match) {
       return false;
@@ -59,18 +60,21 @@ export default function AddCard() {
     return "20" + year >= today.getFullYear() && month >= today.getMonth() + 1;
   };
 
+  // Cvc validator
   const validateCvc = (string) => {
     // any digits, must be 3 digits
     const regex = /^\d{3}$/;
     return regex.test(string);
   };
 
+  // Name validator
   const validateName = (string) => {
     // all characters is valid exept numbers 0-9, must be 2
     const regex = /^[^0-9]{2,}$/;
     return regex.test(string);
   };
 
+  // Card number validator
   const validateNumber = (string) => {
     // 4-5 followed by 0-9 is ok & 6 followed by 0,2,5 is ok, + 14 digits
     const regex = /^([4-5][0-9]|6[025])\d{14}$/;
