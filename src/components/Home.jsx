@@ -1,12 +1,10 @@
-import React /* , { useState } */ from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { changeStatus } from "./cardsSlice";
 
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
-
-import { useDispatch } from "react-redux";
 
 export default function Home() {
   // get the cardList array
@@ -48,17 +46,19 @@ export default function Home() {
         cardList.map((item, i) => {
           // if status is false render card, else do nothing
           return item.status ? null : (
-            <div key={i} onClick={() => setStatus(i)}>
-              <Cards
-                key={i}
-                number={item.number}
-                name={item.name}
-                expiry={item.expiry}
-                cvc={item.cvc}
-                status={item.status}
-                id={i}
-              />
-            </div>
+            <>
+              <div key={i} onClick={() => setStatus(i)}>
+                <Cards
+                  key={i}
+                  number={item.number}
+                  name={item.name}
+                  expiry={item.expiry}
+                  cvc={item.cvc}
+                  status={item.status}
+                  id={i}
+                />
+              </div>
+            </>
           );
         })}
 
