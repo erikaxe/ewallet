@@ -72,7 +72,7 @@ export default function AddCard() {
 
   return (
     <div className="container">
-      <h2 className="text-center mt-5">ADD A NEW BANK CARD</h2>
+      <h2 className="text-center my-5">ADD A NEW BANK CARD</h2>
 
       {/* render a preview card */}
       <Cards
