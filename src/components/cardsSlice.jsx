@@ -18,7 +18,7 @@ const initialState = {
       status: false,
     },
     {
-      number: "6212312312312312",
+      number: "4444444444444444",
       name: "Sven Adamsson",
       expiry: "0429",
       cvc: "219",
