@@ -48,8 +48,7 @@ const slice = createSlice({
           state.cardList[i].status = false;
         }
       }
-      // "reverse" the status on the card that should be active
-      // change card from false to true
+      // change card from false to true to make it "active"
       state.cardList[payload].status = !state.cardList[payload].status;
     },
   },
