@@ -48,7 +48,7 @@ const slice = createSlice({
           state.cardList[i].status = false;
         }
       }
-      // change card from false to true to make it "active"
+      // change from false to true to make a new card "active"
       state.cardList[payload].status = !state.cardList[payload].status;
     },
   },
