@@ -197,8 +197,10 @@ export default function AddCard() {
           maxLength="3"
         />
         <div className="text-center mt-4">
+          {/* Current cards counter */}
           <p className="m-0">{cardList.length} / 4 cards</p>
           <p className="mb-5">
+            {/* If 4 cards in array show message */}
             {cardList.length === 4
               ? "You have the maximum amount of cards"
               : null}
