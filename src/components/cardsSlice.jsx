@@ -8,7 +8,6 @@ const initialState = {
       name: "Erik Axelsson",
       expiry: "1025",
       cvc: "111",
-      id: Date.now(),
       status: true,
     },
     {
@@ -16,7 +15,6 @@ const initialState = {
       name: "Adam svensson",
       expiry: "1127",
       cvc: "222",
-      id: Date.now(),
       status: false,
     },
     {
@@ -24,7 +22,6 @@ const initialState = {
       name: "Sven Adamsson",
       expiry: "0429",
       cvc: "219",
-      id: Date.now(),
       status: false,
     },
   ],
