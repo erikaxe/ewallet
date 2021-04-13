@@ -35,7 +35,7 @@ export default function AddCard() {
         status: false,
       })
     );
-    // reset the inputs
+    // reset the states/inputs
     setNumber("");
     setName("");
     setExpiry("");
