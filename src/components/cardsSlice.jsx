@@ -48,6 +48,7 @@ const slice = createSlice({
           state.cardList[i].status = false;
         }
       }
+      // payload contains card id from loop index in Home
       // change from false to true to make a new card "active"
       state.cardList[payload].status = !state.cardList[payload].status;
     },
