@@ -83,6 +83,9 @@ export default function AddCard() {
         focused={focus}
       />
       <ul>
+        <p className="m-0">
+          <strong>Accepted cards</strong>
+        </p>
         <li>VISA = start nr 4</li>
         <li>MasterCard = start nr 51-55</li>
         <li>Dankort = start nr 5019</li>
