@@ -82,19 +82,7 @@ export default function AddCard() {
         cvc={cvc}
         focused={focus}
       />
-      <ul>
-        <p className="m-0">
-          <strong>Accepted cards</strong>
-        </p>
-        <li>VISA = start nr 4</li>
-        <li>MasterCard = start nr 51-55</li>
-        <li>Dankort = start nr 5019</li>
-        <li>China UnionPay = start nr 62</li>
-        <li>Maestro = start nr 50, 56-59</li>
-        <li>Discover = start nr 65</li>
-        <li>Hipercard = start nr 60</li>
-      </ul>
-      <form className="form" onSubmit={addCard}>
+      <form className="form mt-5" onSubmit={addCard}>
         <label htmlFor="vendor">Vendor</label>
         <select className="main-select" name="vendor">
           <option
@@ -158,13 +146,20 @@ export default function AddCard() {
         <input
           type="tel"
           name="number"
-          placeholder="Card Number (max 16 digits)"
+          placeholder="Card Number (must be 16 digits)"
           value={number}
           onChange={(e) => setNumber(e.target.value)}
           onFocus={(e) => setFocus(e.target.name)}
           minLength="16"
           maxLength="16"
         />
+        <div className="error-container">
+          {validateNumber(number) ? null : (
+            <p className="error-txt m-0">
+              Must start with: 4, 51-55, 5019, 62, 50, 56-59, 65, 60
+            </p>
+          )}
+        </div>
         <label htmlFor="name">Name</label>
         <input
           type="text"
@@ -176,6 +171,11 @@ export default function AddCard() {
           minLength="2"
           maxLength="16"
         />
+        <div className="error-container">
+          {validateName(name) ? null : (
+            <p className="error-txt m-0">Must be more then 2 characters</p>
+          )}
+        </div>
         <label htmlFor="expiry">Expire date</label>
         <input
           type="text"
@@ -187,6 +187,11 @@ export default function AddCard() {
           minLength="4"
           maxLength="4"
         />
+        <div className="error-container">
+          {validateExpiry(expiry) ? null : (
+            <p className="error-txt m-0">Must be valid date</p>
+          )}
+        </div>
         <label htmlFor="cvc">Cvc</label>
         <input
           type="tel"
@@ -198,6 +203,11 @@ export default function AddCard() {
           minLength="3"
           maxLength="3"
         />
+        <div className="error-container">
+          {validateCvc(cvc) ? null : (
+            <p className="error-txt m-0">Must be 3 numbers</p>
+          )}
+        </div>
         <div className="text-center mt-4">
           {/* Current cards counter */}
           <p className="m-0">{cardList.length} / 4 cards</p>
