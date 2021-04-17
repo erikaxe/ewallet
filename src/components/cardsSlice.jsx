@@ -57,7 +57,6 @@ const slice = createSlice({
         // if the chosen card id matches id in array delete that object
         // payload contains the card id
         if (item.id === action.payload) {
-          console.log(action.payload);
           state.cardList.splice(i, 1);
         }
         return null;
