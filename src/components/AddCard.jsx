@@ -40,6 +40,7 @@ export default function AddCard() {
     setName("");
     setExpiry("");
     setCvc("");
+    setFocus("");
   };
 
   // Expire date validator
