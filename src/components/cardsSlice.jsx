@@ -11,22 +11,6 @@ const initialState = {
       status: true,
       id: Date.now(),
     },
-    /* {
-      number: "6555555555555555",
-      name: "Adam svensson",
-      expiry: "1127",
-      cvc: "222",
-      status: false,
-      id: Date.now(),
-    },
-    {
-      number: "4444444444444444",
-      name: "Sven Adamsson",
-      expiry: "0429",
-      cvc: "219",
-      status: false,
-      id: Date.now(),
-    }, */
   ],
 };
 
