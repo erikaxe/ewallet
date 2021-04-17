@@ -31,6 +31,7 @@ export default function AddCard() {
         name: name,
         expiry: expiry,
         cvc: cvc,
+        id: Date.now(),
         status: false,
       })
     );
