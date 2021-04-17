@@ -15,10 +15,20 @@ input,
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15;
+  min-width: 299px;
 }
 
 .form,
 .main-btn {
   justify-content: center;
   display: grid;
+}
+
+.error-container {
+  height: 19.5px;
+}
+
+.error-txt {
+  color: rgb(134, 15, 15);
+  font-size: 13px;
 }
