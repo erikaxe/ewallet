@@ -49,6 +49,16 @@ const slice = createSlice({
       // change from false to true to make a new card "active"
       state.cardList[payload].status = !state.cardList[payload].status;
     },
+    removeCard: (state, action) => {
+      state.cardList.map((item, i) => {
+        // if the chosen card number matches number in array delete that object
+        // payload contains the card number
+        if (item.number === action.payload) {
+          state.cardList.splice(i, 1);
+        }
+        return null;
+      });
+    },
   },
 });
 
