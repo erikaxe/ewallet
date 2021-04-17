@@ -211,7 +211,7 @@ export default function AddCard() {
         <div className="text-center mt-4">
           {/* Current cards counter */}
           <p className="m-0">{cardList.length} / 4 cards</p>
-          <p className="mb-5">
+          <p className="mb-5 amount">
             {/* If 4 cards in array show message */}
             {cardList.length === 4
               ? "You have the maximum amount of cards"
@@ -229,6 +229,10 @@ export default function AddCard() {
             !validateCvc(cvc) ||
             !validateExpiry(expiry) ||
             cardList.length === 4
+          }
+          // if maximum amount of cards, make btn red
+          style={
+            cardList.length === 4 ? { background: "red", opacity: "20%" } : null
           }
         >
           ADD CARD
