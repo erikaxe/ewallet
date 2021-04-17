@@ -17,8 +17,8 @@ export default function Home() {
     dispatch(changeStatus(id));
   };
 
-  const remove = (number) => {
-    dispatch(removeCard(number));
+  const remove = (id) => {
+    dispatch(removeCard(id));
   };
 
   return (
@@ -38,7 +38,7 @@ export default function Home() {
                 expiry={item.expiry}
                 cvc={item.cvc}
                 status={item.status}
-                id={i}
+                id={item.id}
               />
             </>
           ) : null;
@@ -61,13 +61,13 @@ export default function Home() {
                   expiry={item.expiry}
                   cvc={item.cvc}
                   status={item.status}
-                  id={i}
+                  id={item.id}
                 />
               </div>
               <div className="text-center mb-5 mt-2">
                 <button
                   className="btn btn-danger"
-                  onClick={() => remove(item.number)}
+                  onClick={() => remove(item.id)}
                 >
                   Delete
                 </button>
