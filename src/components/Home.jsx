@@ -78,7 +78,7 @@ export default function Home() {
 
       <div className="main-btn mt-5 text-center">
         <p>{cardList.length} / 4 cards</p>
-        <p className="mb-4">
+        <p className="mb-4 amount">
           {cardList.length === 4
             ? "You have the maximum amount of cards"
             : null}
