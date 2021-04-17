@@ -9,13 +9,15 @@ const initialState = {
       expiry: "1025",
       cvc: "111",
       status: true,
+      id: Date.now(),
     },
-    {
+    /* {
       number: "6555555555555555",
       name: "Adam svensson",
       expiry: "1127",
       cvc: "222",
       status: false,
+      id: Date.now(),
     },
     {
       number: "4444444444444444",
@@ -23,7 +25,8 @@ const initialState = {
       expiry: "0429",
       cvc: "219",
       status: false,
-    },
+      id: Date.now(),
+    }, */
   ],
 };
 
@@ -51,9 +54,10 @@ const slice = createSlice({
     },
     removeCard: (state, action) => {
       state.cardList.map((item, i) => {
-        // if the chosen card number matches number in array delete that object
-        // payload contains the card number
-        if (item.number === action.payload) {
+        // if the chosen card id matches id in array delete that object
+        // payload contains the card id
+        if (item.id === action.payload) {
+          console.log(action.payload);
           state.cardList.splice(i, 1);
         }
         return null;
